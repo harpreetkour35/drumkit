@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import background from "./image.jpg";
+import "./App.css";
+
+
+window.addEventListener("keydown", (event) => {
+  let keyPressed = event.key.toUpperCase();
+  console.log(keyPressed);
+});
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <img src={background} alt="back" />
+      <div className="flex-container">
+        <button className="key">A</button>
+        <button className="key">S</button>
+        <button className="key">D</button>
+        <button className="key">F</button>
+        <button className="key">G</button>
+        <button className="key">H</button>
+        <button className="key">J</button>
+      </div>
     </div>
   );
 }
+
+
 
 export default App;
