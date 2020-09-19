@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import background from "./image.jpg";
 import "./App.css";
 
@@ -14,101 +14,55 @@ import soundfile9 from "./audios/tom.wav";
 
 function App() {
 
-  useEffect(() => {
-    window.addEventListener("keydown", (event) => {
-      let keyPressed = event.key.toUpperCase();
-      playing(keyPressed);
-      changeStyle(keyPressed);
-    })
+  const [ activeKey, setActiveKey] = useState()
+
+  const soundKeyMap = {
+    A: soundfile1, 
+    S: soundfile2,
+    D: soundfile3,
+    F: soundfile4,
+    G: soundfile5,
+    H: soundfile6,
+    J: soundfile7,
+    K: soundfile8,
+    P: soundfile9
+  };
+
+  const handleKeyDown = (e) => {
+    let keyPressed = e.key.toUpperCase();
+    playing(keyPressed);
+    changeStyle(keyPressed);
   }
-  )
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log('DEF');
+  }, [activeKey]);
 
 
   function changeStyle(param) {
-    
-    if (param === 'A') {
-      let pressedElement = document.getElementsByClassName('pressed');
-      pressedElement[0].classList.remove('newclass', 'pressed')
-      let element = document.getElementById(param) 
-      element.classList.add("newclass", 'pressed');
-
-    } else if (param === 'S') {
-      let pressedElement = document.getElementsByClassName('pressed');
-      pressedElement[0].classList.remove('newclass', 'pressed')
-      let element = document.getElementById(param) 
-      element.classList.add("newclass", 'pressed');
-
-    } else if (param === 'D') {
-      let pressedElement = document.getElementsByClassName('pressed');
-      pressedElement[0].classList.remove('newclass', 'pressed')
-      let element = document.getElementById(param) 
-      element.classList.add("newclass", 'pressed');
-    }
-    else if (param === 'F') {
-      let pressedElement = document.getElementsByClassName('pressed');
-      pressedElement[0].classList.remove('newclass', 'pressed')
-      let element = document.getElementById(param) 
-      element.classList.add("newclass", 'pressed');
-    }
-    else if (param === 'G') {
-      let pressedElement = document.getElementsByClassName('pressed');
-      pressedElement[0].classList.remove('newclass', 'pressed')
-      let element = document.getElementById(param) 
-      element.classList.add("newclass", 'pressed');
-    }
-    else if (param === 'H') {
-      let pressedElement = document.getElementsByClassName('pressed');
-      pressedElement[0].classList.remove('newclass', 'pressed')
-      let element = document.getElementById(param) 
-      element.classList.add("newclass", 'pressed');
-    }
-    else if (param === 'J') {
-      let pressedElement = document.getElementsByClassName('pressed');
-      pressedElement[0].classList.remove('newclass', 'pressed')
-      let element = document.getElementById(param) 
-      element.classList.add("newclass", 'pressed');
-    } 
+    setActiveKey(param)
   }
   
   function playing(alphabet) {
-      switch (alphabet) {
-        case "A":
-          return(
-            new Audio(soundfile1).play()
-          )
-        case "S":
-          return new Audio(soundfile2).play() 
-        case "D":
-          return new Audio(soundfile3).play();
-        case "F":
-          return new Audio(soundfile4).play();
-        case "G":
-          return new Audio(soundfile5).play();
-        case "H":
-          return new Audio(soundfile6).play();
-        case "J":
-          return new Audio(soundfile7).play();
-        case "K":
-          return new Audio(soundfile8).play();
-        case "L":
-          return new Audio(soundfile9).play();
-        default:
-          return null;
-      }
-    }
+    return new Audio(soundKeyMap[alphabet]).play() 
+  }
 
   return (
     <div className="App">
       <img src={background} alt="back" />
       <div className="flex-container">
-        <h1 style={{display: "none"}} id= 'Image' className="pressed">Drumkit</h1>
-        <button id= 'A' className='key'>A</button>
-        <button id= 'S' className='key'>S</button>
-        <button id= 'D' className='key'>D</button>
-        <button id= 'F' className='key'>F</button>
-        <button id= 'G' className='key'>G</button>
-        <button id= 'H' className='key'>H</button>
-        <button id= 'J' className='key'>J</button>
+        {
+          Object.keys(soundKeyMap).map((soundKey) => <button key={soundKey} className={`key ${activeKey === soundKey ? 'newclass': ''}`}>{soundKey}</button>)
+        }
+                
       </div>
     </div>
   );
