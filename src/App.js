@@ -19,24 +19,57 @@ function App() {
       let keyPressed = event.key.toUpperCase();
       playing(keyPressed);
       changeStyle(keyPressed);
-      removeClass(keyPressed);
     })
   }
   )
 
 
   function changeStyle(param) {
-    let element = document.getElementById(`${param}`)
-    element.classList.add("newclass");
-    console.log(element)
+    
+    if (param === 'A') {
+      let pressedElement = document.getElementsByClassName('pressed');
+      pressedElement[0].classList.remove('newclass', 'pressed')
+      let element = document.getElementById(param) 
+      element.classList.add("newclass", 'pressed');
+
+    } else if (param === 'S') {
+      let pressedElement = document.getElementsByClassName('pressed');
+      pressedElement[0].classList.remove('newclass', 'pressed')
+      let element = document.getElementById(param) 
+      element.classList.add("newclass", 'pressed');
+
+    } else if (param === 'D') {
+      let pressedElement = document.getElementsByClassName('pressed');
+      pressedElement[0].classList.remove('newclass', 'pressed')
+      let element = document.getElementById(param) 
+      element.classList.add("newclass", 'pressed');
+    }
+    else if (param === 'F') {
+      let pressedElement = document.getElementsByClassName('pressed');
+      pressedElement[0].classList.remove('newclass', 'pressed')
+      let element = document.getElementById(param) 
+      element.classList.add("newclass", 'pressed');
+    }
+    else if (param === 'G') {
+      let pressedElement = document.getElementsByClassName('pressed');
+      pressedElement[0].classList.remove('newclass', 'pressed')
+      let element = document.getElementById(param) 
+      element.classList.add("newclass", 'pressed');
+    }
+    else if (param === 'H') {
+      let pressedElement = document.getElementsByClassName('pressed');
+      pressedElement[0].classList.remove('newclass', 'pressed')
+      let element = document.getElementById(param) 
+      element.classList.add("newclass", 'pressed');
+    }
+    else if (param === 'J') {
+      let pressedElement = document.getElementsByClassName('pressed');
+      pressedElement[0].classList.remove('newclass', 'pressed')
+      let element = document.getElementById(param) 
+      element.classList.add("newclass", 'pressed');
+    } 
   }
-
-  function removeClass(param) {
-    let
-  }
-
-
-
+  
   function playing(alphabet) {
       switch (alphabet) {
         case "A":
@@ -68,6 +101,7 @@ function App() {
     <div className="App">
       <img src={background} alt="back" />
       <div className="flex-container">
+        <h1 style={{display: "none"}} id= 'Image' className="pressed">Drumkit</h1>
         <button id= 'A' className='key'>A</button>
         <button id= 'S' className='key'>S</button>
         <button id= 'D' className='key'>D</button>
